@@ -42,9 +42,6 @@ sed -i 's/^.\?PermitRootLogin.*$/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i 's/^.\?ALGO=.*$/ALGO=lzo-rle/g' /etc/default/zramswap
 sed -i 's/^.\?PERCENT=.*$/PERCENT=300/g' /etc/default/zramswap
 
-wget https://github.com/Haris131/speedtest/raw/main/ram.py -O /usr/bin/ram && chmod +x /usr/bin/ram
-wget https://github.com/Haris131/speedtest/raw/main/speedtest -O /usr/bin/speedtest && chmod +x /usr/bin/ram
-
 # Add user
 adduser --disabled-password --comment "" chewy
 # Set password
