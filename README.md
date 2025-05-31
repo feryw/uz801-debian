@@ -1,13 +1,13 @@
-# ufi003-debian
-适用于UFI003_MB_V02的Debian构建脚本
+# uz801v3-debian
+Debian build script for UZ801_V3.2
 
-## 特性
+## Features
 - NFS client v2/v3/v4, NFS server v3/v4
 - KSMBD
-- 默认300% zram
-- boot-no-modem-oc.img内核超频至1.2GHz
+- Default 300% zram
+- Kernel overclocked to 1.4GHz
 
-## 手动更换内核
+## Manually change the kernel
 ```shell
 cd /tmp
 wget KERN_DEB_URL
@@ -18,8 +18,8 @@ dd if=/tmp/boot.img of=/dev/disk/by-partlabel/boot bs=1M
 reboot
 ```
 
-## 本地构建
-1. 克隆本仓库
-2. 安装软件包 `debootstrap rsync qemu-user-static binfmt-support android-sdk-libsparse-utils`
-3. 进入rootfs目录，以root权限运行`build.sh`
-4. 构建完成后会在rootfs目录得到rootfs.img，kernel目录得到boot.img
+## Local build 
+1. Clone this repository
+2. Install the package `debootstrap rsync qemu-user-static binfmt-support android-sdk-libsparse-utils`
+3. Enter the rootfs directory and run `build.sh` with root privileges
+4. After the build is complete, you will get rootfs.img in the rootfs directory and boot.img in the kernel directory

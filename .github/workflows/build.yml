@@ -41,6 +41,6 @@ jobs:
           body_path: release_notes.md
           tag_name: ${{ steps.version.outputs.TAG_NAME }}
           files: |
-            aboot/emmc_appsboot-test-signed.mbn
+            aboot/*.mbn
             kernel/*.img
             rootfs/rootfs.img.xz
