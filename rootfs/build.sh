@@ -1,6 +1,6 @@
 #/bin/bash
 
-DIST=bullseye
+DIST=bookworm
 BOOT_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/boot.img"
 K_IMAGE_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-image-6.6.92_6.6.92-gb46e298d66d7-1_arm64.deb"
 K_HEADER_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-headers-6.6.92_6.6.92-gb46e298d66d7-1_arm64.deb"
