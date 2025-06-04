@@ -44,13 +44,6 @@ sed -i 's/^.\?PermitRootLogin.*$/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i 's/^.\?ALGO=.*$/ALGO=lzo-rle/g' /etc/default/zramswap
 sed -i 's/^.\?PERCENT=.*$/PERCENT=300/g' /etc/default/zramswap
 
-git clone https://github.com/Oink70/CCminer-ARM-optimized.git
-cd CCminer-ARM-optimized
-chmod +x build.sh
-chmod +x configure.sh
-chmod +x autogen.sh
-CXX=clang++ CC=clang build.sh
-
 # Add user
 adduser --disabled-password --comment "" chewy
 # Set password
@@ -80,6 +73,13 @@ cat <<EOF >> /home/chewy/.bashrc
 clear
 /usr/bin/neofetch
 EOF
+
+git clone https://github.com/Oink70/CCminer-ARM-optimized.git
+cd CCminer-ARM-optimized
+chmod +x build.sh
+chmod +x configure.sh
+chmod +x autogen.sh
+CXX=clang++ CC=clang ./build.sh
 
 echo "## Default Configuration" > /tmp/info.md
 vmlinuz_name=$(basename /boot/vmlinuz-*)
