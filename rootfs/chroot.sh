@@ -26,7 +26,7 @@ EOF
 
 apt-get update
 apt-get full-upgrade -y
-apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools sudo curl wget neofetch
+apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools busybox-syslogd sudo curl wget neofetch
 apt-get install -y /tmp/*.deb
 ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 timedatectl set-ntp 1
