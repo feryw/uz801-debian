@@ -49,6 +49,10 @@ echo >> info.md
 echo "🔗 [linux-libc-dev]($K_DEV_URL)" >> info.md
 rm -rf debian/tmp/* debian/root/.bash_history > /dev/null 2>&1
 
+wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/ram.py -O debian/usr/bin/ram && chmod +x debian/usr/bin/ram
+wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/speedtest -O debian/usr/bin/speedtest && chmod +x debian/usr/bin/speedtest
+wget --no-check-certificate https://raw.githubusercontent.com/satriakanda/mmsms/refs/heads/main/mmsms -O debian/usr/bin/mmsms && chmod +x debian/usr/bin/mmsms
+
 dd if=/dev/zero of=debian-uz801v3.img bs=1M count=$(( $(du -ms debian | cut -f1) + 100 ))
 mkfs.ext4 -L rootfs -U $UUID debian-uz801v3.img
 mount debian-uz801v3.img build
