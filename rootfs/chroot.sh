@@ -26,7 +26,7 @@ EOF
 
 apt-get update
 apt-get full-upgrade -y
-apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools busybox-syslogd sudo curl wget neofetch
+apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools sudo curl wget screen htop neofetch python3 python3-pip python3-venv php php-curl php-json
 apt-get install -y /tmp/*.deb
 ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 timedatectl set-ntp 1
@@ -66,11 +66,52 @@ alias du='du -hs'
 
 EOF
 
+cat <<EOF >> /etc/systemd/system/rc-local.service
+[Unit]
+Description=/etc/rc.local
+ConditionPathExists=/etc/rc.local
+
+[Service]
+Type=forking
+ExecStart=/etc/rc.local start
+TimeoutSec=0
+StandardOutput=tty
+RemainAfterExit=yes
+SysVStartPriority=99
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+cat <<EOF >> /etc/rc.local
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+exit 0
+EOF
+
+chmod +x /etc/rc.local
+ln -s /etc/systemd/system/rc-local.service /usr/lib/systemd/system/rc-local.service
+
 cat <<EOF >> /home/chewy/.bashrc
 
 clear
 /usr/bin/neofetch
 EOF
+
+wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/ram.py -O /usr/bin/ram && chmod +x /usr/bin/ram
+wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/speedtest -O /usr/bin/speedtest && chmod +x /usr/bin/speedtest
+wget --no-check-certificate https://raw.githubusercontent.com/satriakanda/mmsms/refs/heads/main/mmsms -O /usr/bin/mmsms && chmod +x /usr/bin/mmsms
 
 echo "## Default Configuration" > /tmp/info.md
 vmlinuz_name=$(basename /boot/vmlinuz-*)
