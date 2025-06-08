@@ -109,10 +109,6 @@ clear
 /usr/bin/neofetch
 EOF
 
-wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/ram.py -O /usr/bin/ram && chmod +x /usr/bin/ram
-wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/speedtest -O /usr/bin/speedtest && chmod +x /usr/bin/speedtest
-wget --no-check-certificate https://raw.githubusercontent.com/satriakanda/mmsms/refs/heads/main/mmsms -O /usr/bin/mmsms && chmod +x /usr/bin/mmsms
-
 echo "## Default Configuration" > /tmp/info.md
 vmlinuz_name=$(basename /boot/vmlinuz-*)
 cat <<EOF >> /tmp/info.md
