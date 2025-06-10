@@ -23,6 +23,15 @@ jobs:
           sudo ./build.sh
           sudo xz rootfs.img
 
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: debian
+          path: |
+            aboot/*.mbn
+            kernel/*.img
+            rootfs/rootfs.img.xz
+
       - name: Generate release tag
         id: version
         run: |
