@@ -1,10 +1,10 @@
 #/bin/bash
 
 DIST=bookworm
-BOOT_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/boot.img"
-K_IMAGE_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-image-6.6.92_6.6.92-gb46e298d66d7-1_arm64.deb"
-K_HEADER_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-headers-6.6.92_6.6.92-gb46e298d66d7-1_arm64.deb"
-K_DEV_URL="https://github.com/Haris131/uz801v3-kernel/releases/tag/v6.6.92"
+BOOT_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.93/boot.img"
+K_IMAGE_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.93/linux-image-6.6.93_6.6.93-g1bb4af284064-1_arm64.deb"
+K_HEADER_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.93/linux-headers-6.6.93_6.6.93-g1bb4af284064-1_arm64.deb"
+K_DEV_URL="https://github.com/Haris131/uz801v3-kernel/releases/tag/v6.6.93"
 UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 if [ `id -u` -ne 0 ]
@@ -49,7 +49,7 @@ echo >> info.md
 echo "🔗 [linux-libc-dev]($K_DEV_URL)" >> info.md
 rm -rf debian/tmp/* debian/root/.bash_history > /dev/null 2>&1
 
-wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/ram.py -O debian/usr/bin/ram && chmod +x debian/usr/bin/ram
+wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/ram.py -O debian/usr/bin/ram && chmod +x debian/usr/bin/ram && sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python3|g' debian/usr/bin/ram
 wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/speedtest -O debian/usr/bin/speedtest && chmod +x debian/usr/bin/speedtest
 wget --no-check-certificate https://raw.githubusercontent.com/satriakanda/mmsms/refs/heads/main/mmsms -O debian/usr/bin/mmsms && chmod +x debian/usr/bin/mmsms
 
