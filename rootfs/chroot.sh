@@ -102,7 +102,7 @@ exit 0
 EOF
 
 chmod +x /etc/rc.local
-ln -s /etc/systemd/system/rc-local.service /usr/lib/systemd/system/rc-local.service
+ln -s /etc/systemd/system/rc-local.service /etc/systemd/system/multi-user.target.wants/rc-local.service
 
 cat <<EOF >> /home/chewy/.bashrc
 
