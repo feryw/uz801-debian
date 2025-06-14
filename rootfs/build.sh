@@ -1,10 +1,10 @@
 #/bin/bash
 
 DIST=bookworm
-BOOT_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.93/boot.img"
-K_IMAGE_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.93/linux-image-6.6.93_6.6.93-g08d34f09f529-1_arm64.deb"
-K_HEADER_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.93/linux-headers-6.6.93_6.6.93-g08d34f09f529-1_arm64.deb"
-K_DEV_URL="https://github.com/Haris131/uz801v3-kernel/releases/tag/v6.6.93"
+BOOT_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/boot.img"
+K_IMAGE_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-image-6.6.92_6.6.92-g7a27969bc51f-1_arm64.deb"
+K_HEADER_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-headers-6.6.92_6.6.92-g7a27969bc51f-1_arm64.deb"
+K_DEV_URL="https://github.com/Haris131/uz801v3-kernel/releases/tag/v6.6.92"
 UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 if [ `id -u` -ne 0 ]
