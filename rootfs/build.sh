@@ -1,10 +1,10 @@
 #/bin/bash
 
 DIST=bookworm
-BOOT_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/boot.img"
-K_IMAGE_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-image-6.6.92_6.6.92-g7a27969bc51f-1_arm64.deb"
-K_HEADER_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-headers-6.6.92_6.6.92-g7a27969bc51f-1_arm64.deb"
-K_DEV_URL="https://github.com/Haris131/uz801v3-kernel/releases/tag/v6.6.92"
+BOOT_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.6.96-armv7/boot.img"
+K_IMAGE_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.6.96-armv7/linux-image-6.6.96-wyref+_6.6.96-g2a223d5640d7-1_armhf.deb"
+K_HEADER_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.6.96-armv7/linux-headers-6.6.96-wyref+_6.6.96-g2a223d5640d7-1_armhf.deb"
+K_DEV_URL="https://github.com/feryw/msm8916-kernel/releases/tag/v6.6.96-armv7"
 UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 if [ `id -u` -ne 0 ]
@@ -18,7 +18,7 @@ wget -P ../kernel "$K_IMAGE_DEB_URL"
 wget -P ../kernel "$K_HEADER_DEB_URL"
 
 mkdir debian build
-debootstrap --arch=arm64 --foreign $DIST debian https://deb.debian.org/debian/
+debootstrap --arch=armhf --foreign $DIST debian https://deb.debian.org/debian/
 LANG=C LANGUAGE=C LC_ALL=C chroot debian /debootstrap/debootstrap --second-stage
 cp ../deb-pkgs/*.deb ../kernel/linux-*.deb chroot.sh debian/tmp/
 mount --bind /proc debian/proc
