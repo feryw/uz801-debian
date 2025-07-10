@@ -1,5 +1,4 @@
 name: Build debian
-on: push
 
 jobs:
   build:
