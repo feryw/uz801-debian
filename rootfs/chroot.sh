@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LANG_TARGET=en_US.UTF-8
-PASSWORD=1234
+PASSWORD=12
 NAME=uz801v3
 PARTUUID=a7ab80e8-e9d1-e8cd-f157-93f69b1d141e
 
@@ -44,14 +44,14 @@ sed -i 's/^.\?ALGO=.*$/ALGO=lzo-rle/g' /etc/default/zramswap
 sed -i 's/^.\?PERCENT=.*$/PERCENT=300/g' /etc/default/zramswap
 
 # Add user
-adduser --disabled-password --comment "" chewy
+adduser --disabled-password --comment "" wyref
 # Set password
-passwd chewy << EOD
+passwd wyref << EOD
 $PASSWORD
 $PASSWORD
 EOD
 # Add user to sudo group
-usermod -aG sudo chewy
+usermod -aG sudo wyref
 
 cat <<EOF >> /etc/bash.bashrc
 
@@ -104,7 +104,7 @@ EOF
 chmod +x /etc/rc.local
 ln -s /etc/systemd/system/rc-local.service /etc/systemd/system/multi-user.target.wants/rc-local.service
 
-cat <<EOF >> /home/chewy/.bashrc
+cat <<EOF >> /home/wyref/.bashrc
 
 clear
 /usr/bin/neofetch
@@ -135,7 +135,7 @@ echo "## Default Configuration" > /tmp/info.md
 vmlinuz_name=$(basename /boot/vmlinuz-*)
 cat <<EOF >> /tmp/info.md
 - Kernel version: ${vmlinuz_name#*-}
-- Default username: root / chewy
+- Default username: root / wyref
 - Default password: $PASSWORD
 - WiFi name: openstick
 - WiFi password: 12345678
