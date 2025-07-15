@@ -8,10 +8,10 @@ fi
 
 DIST=bookworm
 REPO_URL="https://api.github.com/repos/haris131/uz801v3-kernel/releases"
-BOOT_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep boot.img | awk '{print $1}')"
-K_IMAGE_DEB_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-image | awk '{print $1}')"
-K_HEADER_DEB_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-headers | awk '{print $1}')"
-K_DEV_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep html_url | awk -F 'html_url:' '{print $2}')"
+BOOT_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep boot.img | awk '{print $1}')
+K_IMAGE_DEB_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "browser_download_url:*.*${DISTRO_ARCH}.deb" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-image | awk '{print $1}')
+K_HEADER_DEB_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "browser_download_url:*.*${DISTRO_ARCH}.deb" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-headers | awk '{print $1}')
+K_DEV_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep html_url | awk -F 'html_url:' '{print $2}')
 UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 if [ `id -u` -ne 0 ]
