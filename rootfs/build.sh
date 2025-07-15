@@ -27,7 +27,7 @@ wget -P ../kernel "$K_HEADER_DEB_URL"
 mkdir debian build
 debootstrap --arch=${DISTRO_ARCH} --foreign $DIST debian https://deb.debian.org/debian/
 LANG=C LANGUAGE=C LC_ALL=C chroot debian /debootstrap/debootstrap --second-stage
-cp ../deb-pkgs/*.deb ../kernel/linux-*.deb chroot.sh debian/tmp/
+cp ../deb-pkgs/firmware-uz801v3.deb ../deb-pkgs/${1}/openstick-utils-all.deb ../kernel/linux-*.deb chroot.sh debian/tmp/
 mount --bind /proc debian/proc
 mount --bind /dev debian/dev
 mount --bind /dev/pts debian/dev/pts
