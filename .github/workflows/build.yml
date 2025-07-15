@@ -1,5 +1,16 @@
 name: Build debian
-on: push
+on:
+  repository_dispatch:
+  workflow_dispatch:
+    inputs:
+      arch:
+        description: "Target architecture"
+        required: true
+        default: 'arm64'
+        type: choice
+        options:
+          - arm64
+          - armv7
 
 jobs:
   build:
@@ -20,7 +31,7 @@ jobs:
       - name: Build
         run: |
           cd rootfs
-          sudo ./build.sh
+          sudo ./build.sh ${{ inputs.arch }}
           sudo xz rootfs.img
 
       - name: Upload artifacts
@@ -36,7 +47,7 @@ jobs:
         id: version
         run: |
           NAME=$(echo "Debian $(cat rootfs/debian_version)")
-          TAG_NAME=$(cat rootfs/debian_version)-${{ github.run_number }}
+          TAG_NAME=$(cat rootfs/debian_version)-${{ github.run_number }}-${{ inputs.arch }}
           git tag $TAG_NAME
           git push origin $TAG_NAME
           echo -e "- Bootloader: $(cat aboot/ver.txt)\n$(cat rootfs/info.md)\n\n$(git log -1 --format=%B)" > release_notes.md
