@@ -1,10 +1,17 @@
 #/bin/bash
 
+if [[ "${1}" == "arm64" ]]; then
+  DISTRO_ARCH="arm64"
+else
+  DISTRO_ARCH="armhf"
+fi
+
 DIST=bookworm
-BOOT_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/boot.img"
-K_IMAGE_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-image-6.6.92_6.6.92-g7a27969bc51f-1_arm64.deb"
-K_HEADER_DEB_URL="https://github.com/Haris131/uz801v3-kernel/releases/download/v6.6.92/linux-headers-6.6.92_6.6.92-g7a27969bc51f-1_arm64.deb"
-K_DEV_URL="https://github.com/Haris131/uz801v3-kernel/releases/tag/v6.6.92"
+REPO_URL="https://api.github.com/repos/haris131/uz801v3-kernel/releases"
+BOOT_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${DISTRO_ARCH}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep boot.img | awk '{print $1}')"
+K_IMAGE_DEB_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${DISTRO_ARCH}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-image | awk '{print $1}')"
+K_HEADER_DEB_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${DISTRO_ARCH}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-headers | awk '{print $1}')"
+K_DEV_URL="$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${DISTRO_ARCH}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep html_url | awk -F 'html_url:' '{print $2}')"
 UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 if [ `id -u` -ne 0 ]
@@ -18,7 +25,7 @@ wget -P ../kernel "$K_IMAGE_DEB_URL"
 wget -P ../kernel "$K_HEADER_DEB_URL"
 
 mkdir debian build
-debootstrap --arch=arm64 --foreign $DIST debian https://deb.debian.org/debian/
+debootstrap --arch=${DISTRO_ARCH} --foreign $DIST debian https://deb.debian.org/debian/
 LANG=C LANGUAGE=C LC_ALL=C chroot debian /debootstrap/debootstrap --second-stage
 cp ../deb-pkgs/*.deb ../kernel/linux-*.deb chroot.sh debian/tmp/
 mount --bind /proc debian/proc
