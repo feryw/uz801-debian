@@ -20,7 +20,7 @@ jobs:
       - name: Prepare
         run: |
           sudo apt-get -y update
-          sudo apt-get -y install debootstrap binfmt-support qemu-user-static android-sdk-libsparse-utils
+          sudo apt-get -y install curl wget debootstrap binfmt-support qemu-user-static android-sdk-libsparse-utils
 
       - name: Checkout
         uses: actions/checkout@v4
@@ -31,7 +31,7 @@ jobs:
       - name: Build
         run: |
           cd rootfs
-          sudo ./build.sh ${{ inputs.arch }}
+          sudo ./build.sh "${{ inputs.arch }}"
           sudo xz rootfs.img
 
       - name: Upload artifacts
