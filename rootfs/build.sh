@@ -1,6 +1,6 @@
 #/bin/bash
 
-if [[ "${1}" == "arm64" ]]; then
+if [ $(echo "${1}" | grep "arm64") ]; then
   DISTRO_ARCH="arm64"
 else
   DISTRO_ARCH="armhf"
