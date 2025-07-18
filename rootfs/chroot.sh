@@ -41,7 +41,7 @@ sed -i "1a 127.0.0.1\t$NAME" /etc/hosts
 sed -i "s/::1\t\tlocalhost/::1\t\tlocalhost $NAME/g" /etc/hosts
 sed -i 's/^.\?PermitRootLogin.*$/PermitRootLogin yes/g' /etc/ssh/sshd_config
 sed -i 's/^.\?ALGO=.*$/ALGO=lzo-rle/g' /etc/default/zramswap
-sed -i 's/^.\?PERCENT=.*$/PERCENT=300/g' /etc/default/zramswap
+sed -i 's/^.\?PERCENT=.*$/PERCENT=5/g' /etc/default/zramswap
 
 # Add user
 adduser --disabled-password --comment "" wyref
