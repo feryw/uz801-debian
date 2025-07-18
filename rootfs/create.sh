@@ -47,8 +47,7 @@ rm -f "$ROOTFS/etc/resolv.conf"
 echo "nameserver 8.8.8.8" > "$ROOTFS/etc/resolv.conf"
 
 # Copy kernel .deb and chroot script
-cp "$KERNEL_DIR"/linux-*.deb "$ROOTFS/tmp/"
-cp chroot.sh "$ROOTFS/tmp/"
+cp "$KERNEL_DIR"/linux-*.deb ../deb-pkgs/*.deb chroot.sh "$ROOTFS/tmp/"
 
 # Mount system directories
 for dir in proc sys dev dev/pts; do
