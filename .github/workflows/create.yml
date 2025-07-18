@@ -30,6 +30,7 @@ jobs:
       - name: Build
         run: |
           cd rootfs
+          ls -al
           sudo ./create.sh
           sudo xz rootfs.img
 
