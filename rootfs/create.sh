@@ -63,15 +63,32 @@ for dir in dev/pts dev sys proc; do
   umount "$ROOTFS/$dir"
 done
 
+# Metadata
+cp "$ROOTFS/etc/debian_version" ./
+mv "$ROOTFS/tmp/info.md" ./
+echo >> info.md
+echo '## Enable Modem
+```
+sudo nmcli connection add type gsm ifname wwan0qmi0 con-name lte
+sudo nmcli connection up lte
+```
+
+## Connect Wifi
+```
+sudo nmcli dev wifi connect "SSID" password "password"
+```
+' >> info.md
+echo >> info.md
+rm -rf debian/tmp/* debian/root/.bash_history > /dev/null 2>&1
+
+wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/ram.py -O debian/usr/bin/ram && chmod +x debian/usr/bin/ram && sed -i 's|#!/usr/bin/env python|#!/usr/bin/env python3|g' debian/usr/bin/ram
+wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/speedtest -O debian/usr/bin/speedtest && chmod +x debian/usr/bin/speedtest
+wget --no-check-certificate https://raw.githubusercontent.com/satriakanda/mmsms/refs/heads/main/mmsms -O debian/usr/bin/mmsms && chmod +x debian/usr/bin/mmsms
+
 # Finalize image
-dd if=/dev/zero of=debian-uz801v3.img bs=1M count=$(( $(du -ms "$ROOTFS" | cut -f1) + 100 ))
+dd if=/dev/zero of=debian-uz801v3.img bs=1M count=$(( $(du -ms "$ROOTFS" | cut -f1) + 200 ))
 mkfs.ext4 -L rootfs -U "$UUID" debian-uz801v3.img
 mount debian-uz801v3.img "$BUILD"
 rsync -aH "$ROOTFS/" "$BUILD/"
 umount "$BUILD"
 img2simg debian-uz801v3.img rootfs.img
-
-# Metadata
-cp "$ROOTFS/etc/debian_version" ./
-echo > info.md
-echo '## Enable Modem
