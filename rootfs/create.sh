@@ -26,10 +26,16 @@ wget -P "$KERNEL_DIR" "$BOOT_URL"
 wget -P "$KERNEL_DIR" "$K_IMAGE_DEB_URL"
 wget -P "$KERNEL_DIR" "$K_HEADER_DEB_URL"
 
-# Fetch rootfs tarball
+DOWNLOAD_SERVER="images.linuxcontainers.org"
+DOWNLOAD_INDEX_PATH="/meta/1.0/index-system"
+DOWNLOAD_DISTRO="debian;bookworm;${DISTRO_ARCH};default"
+
+# Fetch rootfs tarball URL
 echo "==> Downloading rootfs metadata..."
-ROOTFS_URL="https://images.linuxcontainers.org/images/debian/bookworm/$DISTRO_ARCH/default/$(date +%Y%m%d)_00:00/rootfs.tar.xz"
-wget -O rootfs.tar.xz "$ROOTFS_URL"
+ROOTFS_URL="https://$DOWNLOAD_SERVER$(curl -fsSL "https://$DOWNLOAD_SERVER$DOWNLOAD_INDEX_PATH" | grep "$DOWNLOAD_DISTRO" | cut -f6 -d';')rootfs.tar.xz"
+
+echo "==> Downloading rootfs from $ROOTFS_URL"
+curl -L -o rootfs.tar.xz "$ROOTFS_URL"
 
 # Extract rootfs
 tar -xf rootfs.tar.xz -C "$ROOTFS"
