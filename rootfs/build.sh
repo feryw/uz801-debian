@@ -1,10 +1,10 @@
 #/bin/bash
 
 DIST=bookworm
-BOOT_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.6.96-armv7/boot.img"
-K_IMAGE_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.6.96-armv7/linux-image-6.6.96-wyref+_6.6.96-g2a223d5640d7-1_armhf.deb"
-K_HEADER_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.6.96-armv7/linux-headers-6.6.96-wyref+_6.6.96-g2a223d5640d7-1_armhf.deb"
-K_DEV_URL="https://github.com/feryw/msm8916-kernel/releases/tag/v6.6.96-armv7"
+BOOT_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.1-armv7/boot-armv7.img"
+K_IMAGE_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.1-armv7/linux-image-6.12.1-wyref_6.12.1-gadb539838e7e-1_armhf.deb"
+K_HEADER_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.1-armv7/linux-headers-6.12.1-wyref_6.12.1-gadb539838e7e-1_armhf.deb"
+K_DEV_URL="https://github.com/feryw/msm8916-kernel/releases/tag/v6.12.1-armv7"
 UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 if [ `id -u` -ne 0 ]
