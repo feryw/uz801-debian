@@ -1,9 +1,11 @@
 #/bin/bash
 
-if [ $(echo "${1}" | grep "arm64") ]; then
+if [ "${1}" == "arm64" ]; then
   DISTRO_ARCH="arm64"
+  FAST_ARCH="fastfetch-linux-aarch64.deb"
 else
   DISTRO_ARCH="armhf"
+  FAST_ARCH="fastfetch-linux-armv7l.deb"
 fi
 
 DIST=bookworm
@@ -12,6 +14,7 @@ BOOT_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "browser_
 K_IMAGE_DEB_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "browser_download_url:*.*-${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-image | awk '{print $1}' | head -n1)
 K_HEADER_DEB_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "browser_download_url:*.*-${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep linux-headers | awk '{print $1}' | head -n1)
 K_DEV_URL=$(curl -sL "${REPO_URL}" | sed -e 's|"||g' -e 's| ||g' | grep "${1}" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep html_url | awk -F 'html_url:' '{print $2}' | head -n1)
+FASTFETCH_URL=$(curl -sL "https://api.github.com/repos/fastfetch-cli/fastfetch/releases" | sed -e 's|"||g' -e 's| ||g' | grep "browser_download_url:" | sed -e's|browser_download_url:||g' -e 's|,||g' | grep "$FAST_ARCH" | awk '{print $1}' | head -n1)
 UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 if [ `id -u` -ne 0 ]
@@ -27,7 +30,8 @@ wget -P ../kernel "$K_HEADER_DEB_URL"
 mkdir debian build
 debootstrap --arch=${DISTRO_ARCH} --foreign $DIST debian https://deb.debian.org/debian/
 LANG=C LANGUAGE=C LC_ALL=C chroot debian /debootstrap/debootstrap --second-stage
-cp ../deb-pkgs/firmware-uz801v3.deb ../deb-pkgs/${1}/openstick-utils-all.deb ../kernel/linux-*.deb chroot.sh debian/tmp/
+cp ../deb-pkgs/*.deb ../deb-pkgs/${1}/*.deb ../kernel/linux-*.deb chroot.sh debian/tmp/
+wget -P debian/tmp "$FASTFETCH_URL"
 mount --bind /proc debian/proc
 mount --bind /dev debian/dev
 mount --bind /dev/pts debian/dev/pts
