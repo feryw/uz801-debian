@@ -26,7 +26,7 @@ EOF
 
 apt-get update
 apt-get full-upgrade -y
-apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools sudo curl wget screen htop neofetch python3 python3-pip python3-venv php php-curl php-json
+apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools sudo curl wget screen htop python3 python3-pip python3-venv php php-curl php-json
 apt-get install -y iptables-persistent modemmanager wireless-tools 
 apt-get install -y /tmp/*.deb
 ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
@@ -64,7 +64,6 @@ alias bridge='bridge -color'
 alias free='free -h'
 alias df='df -h'
 alias du='du -hs'
-
 EOF
 
 cat <<EOF >> /etc/systemd/system/rc-local.service
@@ -104,10 +103,10 @@ EOF
 chmod +x /etc/rc.local
 ln -s /etc/systemd/system/rc-local.service /etc/systemd/system/multi-user.target.wants/rc-local.service
 
+touch /home/chewy/.hushlogin
 cat <<EOF >> /home/chewy/.bashrc
 
-clear
-/usr/bin/neofetch
+/usr/bin/fastfetch
 EOF
 
 cat <<EOF >> /etc/iptables/rules.v4
