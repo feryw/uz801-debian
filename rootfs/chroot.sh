@@ -26,8 +26,8 @@ EOF
 
 apt-get update
 apt-get full-upgrade -y
-apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools sudo curl wget screen htop neofetch python3 python3-pip python3-venv php php-curl php-json
-apt-get install -y iptables-persistent modemmanager wireless-tools 
+apt-get install -y locales network-manager openssh-server systemd-timesyncd fake-hwclock zram-tools rmtfs qrtr-tools sudo curl wget screen \
+  htop neofetch python3 python3-pip python3-venv iptables-persistent modemmanager wireless-tools 
 apt-get install -y /tmp/*.deb
 ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
 timedatectl set-ntp 1
