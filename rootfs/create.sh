@@ -6,10 +6,11 @@ UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 ROOTFS="debian"
 BUILD="build"
 KERNEL_DIR="../kernel"
-ARTIFACTS_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.1-armv7"
+ARTIFACTS_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.41-wyref-gcc10-armv7"
+https://github.com/feryw/msm8916-kernel/releases/download/v6.12.41-wyref-gcc10-armv7/linux-image-6.12.41-wyref_6.12.41-g1a006f50994d-2_armhf.deb
 BOOT_URL="$ARTIFACTS_URL/boot-armv7.img"
-K_IMAGE_DEB_URL="$ARTIFACTS_URL/linux-image-6.12.1-wyref_6.12.1-gadb539838e7e-1_armhf.deb"
-K_HEADER_DEB_URL="$ARTIFACTS_URL/linux-headers-6.12.1-wyref_6.12.1-gadb539838e7e-1_armhf.deb"
+K_IMAGE_DEB_URL="$ARTIFACTS_URL/linux-image-6.12.41-wyref_6.12.41-g1a006f50994d-2_armhf.deb"
+K_HEADER_DEB_URL="$ARTIFACTS_URL/linux-headers-6.12.41-wyref_6.12.41-g1a006f50994d-2_armhf.deb"
 K_DEV_URL="$ARTIFACTS_URL"
 
 # Ensure root
@@ -85,7 +86,7 @@ wget --no-check-certificate https://github.com/Haris131/speedtest/raw/main/speed
 wget --no-check-certificate https://raw.githubusercontent.com/satriakanda/mmsms/refs/heads/main/mmsms -O debian/usr/bin/mmsms && chmod +x debian/usr/bin/mmsms
 
 # Finalize image
-dd if=/dev/zero of=debian-uz801v3.img bs=1M count=$(( $(du -ms "$ROOTFS" | cut -f1) + 200 ))
+dd if=/dev/zero of=debian-uz801v3.img bs=1M count=$(( $(du -ms "$ROOTFS" | cut -f1) + 100 ))
 mkfs.ext4 -L rootfs -U "$UUID" debian-uz801v3.img
 mount debian-uz801v3.img "$BUILD"
 rsync -aH "$ROOTFS/" "$BUILD/"
