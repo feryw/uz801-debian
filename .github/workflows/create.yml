@@ -48,7 +48,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          NAME=$(echo "Debian $(cat rootfs/debian_version)")
+          NAME=$(echo "Debian $(cat rootfs/debian_version)-${{ inputs.arch }}_${{ github.run_number }}")
           TAG_NAME="$(cat rootfs/debian_version)-${{ inputs.arch }}_${{ github.run_number }}"
           gh release delete "$TAG_NAME" --yes || true
           git tag -d "$TAG_NAME" 2>/dev/null || true
