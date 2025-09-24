@@ -2,10 +2,7 @@
 Debian build script for UZ801_V3.2
 
 ## Features
-- NFS client v2/v3/v4, NFS server v3/v4
-- KSMBD
-- Default 300% zram
-- Kernel overclocked to 1.4GHz
+- Nothing at all
 
 ## Manually change the kernel
 ```shell
