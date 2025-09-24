@@ -6,12 +6,11 @@ UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 ROOTFS="debian"
 BUILD="build"
 KERNEL_DIR="../kernel"
-ARTIFACTS_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.41-wyref-gcc10-armv7"
-https://github.com/feryw/msm8916-kernel/releases/download/v6.12.41-wyref-gcc10-armv7/linux-image-6.12.41-wyref_6.12.41-g1a006f50994d-2_armhf.deb
-BOOT_URL="$ARTIFACTS_URL/boot-armv7.img"
-K_IMAGE_DEB_URL="$ARTIFACTS_URL/linux-image-6.12.41-wyref_6.12.41-g1a006f50994d-2_armhf.deb"
-K_HEADER_DEB_URL="$ARTIFACTS_URL/linux-headers-6.12.41-wyref_6.12.41-g1a006f50994d-2_armhf.deb"
-K_DEV_URL="$ARTIFACTS_URL"
+BOOT_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.48-wyref-gcc10-armv7/boot-v6.12.48-wyref_gcc10_armv7.img"
+K_IMAGE_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.48-wyref-gcc10-armv7/linux-image-6.12.48-wyref_6.12.48-gc80e2799c4cc-2_armhf.deb"
+K_HEADER_DEB_URL="https://github.com/feryw/msm8916-kernel/releases/download/v6.12.48-wyref-gcc10-armv7/linux-headers-6.12.48-wyref_6.12.48-gc80e2799c4cc-2_armhf.deb"
+K_DEV_URL="https://github.com/feryw/msm8916-kernel/releases/tag/v6.12.48-wyref-gcc10-armv7"
+UUID=62ae670d-01b7-4c7d-8e72-60bcd00410b7
 
 # Ensure root
 if [ "$(id -u)" -ne 0 ]; then
